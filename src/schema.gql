@@ -1,0 +1,104 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Tax {
+  taxType: String!
+  taxId: String!
+  rate: Float!
+}
+
+type Price {
+  fullPrice: Float!
+  taxes: [Tax!]!
+}
+
+type Item {
+  sku: String!
+  title: String!
+  categoryId: String!
+  category: String!
+  brand: String!
+  classification: String!
+  unitsPerBox: String!
+  minOrderUnits: String!
+  packageDescription: String!
+  packageUnitDescription: String!
+  quantityMaxRedeem: Float!
+  redeemUnit: String!
+  orderReasonRedeem: String!
+  skuRedeem: Boolean!
+  price: Price!
+  points: Float!
+}
+
+type Portfolio {
+  id: String!
+  channel: String!
+  country: String!
+  createdDate: String!
+  customerCode: String!
+  route: String!
+  items: [Item!]!
+}
+
+type CustomerGroup {
+  group: String!
+  group1: String!
+  group2: String!
+  group3: String!
+  group4: String!
+  group5: String!
+}
+
+type PaymentMethod {
+  clientId: String!
+  typeCredit: String!
+  creditLimit: Float!
+  creditUsed: Float!
+  amountAvailable: Float!
+}
+
+type Portal {
+  id: String!
+  address: String!
+  blocked: String!
+  cellPhone: String!
+  channel: String!
+  clientId: String!
+  country: String!
+  customerGroup: CustomerGroup!
+  customerSchema: Float!
+  distrChan: String!
+  division: String!
+  fiscalCode1: String!
+  fiscalCode2: String!
+  frequency: Boolean!
+  frequencyDays: String!
+  idPortfolio: String!
+  immediateDelivery: Boolean!
+  industryCode: String!
+  industryCode1: String!
+  isEnrollment: Boolean!
+  name: String!
+  name2: String!
+  office: String!
+  paymentCondition: String!
+  paymentMethods: [PaymentMethod!]!
+  priceGroup: String!
+  priceList: String!
+  routeId: String!
+  salesOrg: String!
+  supplyCenter: String!
+  updateDate: String!
+  vendorGroup: String!
+  portfolio: Portfolio!
+}
+
+type PortalResponse {
+  portal: Portal!
+}
+
+type Query {
+  getPortals(clientId: String!): PortalResponse!
+}
