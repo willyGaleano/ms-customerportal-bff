@@ -12,11 +12,14 @@ export const validateEnvironment = (
     if (error instanceof z.ZodError) {
       const pathErros = error.errors.map((err) => err.path.join('.'));
 
-      logger.warn(
-        `Environment variables don't match the schema: ${pathErros.join(', ')}`,
-      );
+      logger.warn({
+        msg: `Environment variables don't match the schema: ${pathErros.join(', ')}`,
+      });
     } else {
-      logger.warn(`Exception on Environment variables: ${error}`);
+      logger.error({
+        msg: 'Error validating environment variables',
+        error,
+      });
     }
     return true;
   }

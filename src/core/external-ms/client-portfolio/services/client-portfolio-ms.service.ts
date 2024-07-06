@@ -12,9 +12,14 @@ export class ClientPortfolioMsService {
     private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
 
-  async getById(id: string): Promise<ClientPortfolio> {
-    const clientPortfolioMsUrl = `${this.getBaseUrl()}/client-portfolios/${id}`;
-    return await this.httpClient.get<ClientPortfolio>(clientPortfolioMsUrl);
+  async getById(id: string): Promise<ClientPortfolio | null> {
+    try {
+      const clientPortfolioMsUrl = `${this.getBaseUrl()}/client-portfolios/${id}`;
+
+      return await this.httpClient.get<ClientPortfolio>(clientPortfolioMsUrl);
+    } catch {
+      return null;
+    }
   }
 
   private getBaseUrl(): string {

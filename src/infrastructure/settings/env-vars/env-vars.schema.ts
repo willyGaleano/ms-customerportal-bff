@@ -16,7 +16,7 @@ export const RedisVariablesSchema = CommonVariablesSchema.merge(
     REDIS_HOST: z.string(),
     REDIS_PORT: z.coerce.number(),
     REDIS_PWD: z.string(),
-    REDIS_USE_TLS: z.boolean().default(false),
+    REDIS_USE_TLS: z.string().default('false').optional(),
     CACHE_DEFAULT_TTL_SECONDS: z.coerce.number().default(60).optional(),
   }),
 );
@@ -40,12 +40,19 @@ export const ClientPortfolioMsVariablesSchema = CommonVariablesSchema.merge(
   }),
 );
 
+export const PortalVariablesSchema = CommonVariablesSchema.merge(
+  z.object({
+    PORTAL_DETAIL_CACHE_TTL_SECONDS: z.coerce.number().default(300),
+  }),
+);
+
 export const EnvironmentVariablesSchema = CommonVariablesSchema.merge(
   RedisVariablesSchema,
 )
   .merge(HttpVariablesSchema)
   .merge(ClientMsVariablesSchema)
   .merge(ClientPortfolioMsVariablesSchema)
+  .merge(PortalVariablesSchema)
   .describe('EnvironmentVariables');
 
 export type EnvironmentVariables = z.infer<typeof EnvironmentVariablesSchema>;

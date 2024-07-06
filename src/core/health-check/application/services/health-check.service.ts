@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { HealthCheckResponseDto } from '../domain/health-check.response.dto';
+import { HealthCheckResponseDto } from '../../domain/health-check.response.dto';
 
 @Injectable()
 export class HealthCheckService {

@@ -1,36 +1,52 @@
+import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { ClientPortfolioMsService } from 'src/core/external-ms/client-portfolio/services/client-portfolio-ms.service';
-import { ClientMsService } from 'src/core/external-ms/client/services/client-ms.service';
-import { CacheService } from 'src/infrastructure/cache/services/cache.service';
+import { ClientPortfolioMsService } from '../../../../core/external-ms/client-portfolio/services/client-portfolio-ms.service';
+import { ClientMsService } from '../../../../core/external-ms/client/services/client-ms.service';
+import { CacheService } from '../../../../infrastructure/cache/services/cache.service';
 import { Portal } from '../../domain/models/portal.model';
+import { EnvironmentVariables } from '../../../../infrastructure/settings/env-vars/env-vars.schema';
 
 @Injectable()
 export class PortalDetailUseCase {
+  readonly PORTAL_CACHE_PREFIX = 'portal:';
   constructor(
     private readonly clientMsService: ClientMsService,
     private readonly clientPortfolioMsService: ClientPortfolioMsService,
     private readonly cacheService: CacheService,
+    private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
 
-  async execute(clientId: string): Promise<Portal> {
+  async execute(clientId: string): Promise<Portal | null> {
     const portalCached = await this.cacheService.get(clientId);
     if (portalCached) return JSON.parse(portalCached);
 
     const client = await this.clientMsService.getById(clientId);
+    if (!client) return null;
+
     const clientPortfolio = await this.clientPortfolioMsService.getById(
       client.idPortfolio,
     );
 
     const portal: Portal = {
       ...client,
-      portfolio: {
-        ...clientPortfolio,
-        items: clientPortfolio.items,
-      },
+      portfolio: clientPortfolio
+        ? {
+            ...clientPortfolio,
+            items: clientPortfolio.items ?? [],
+          }
+        : null,
     };
 
-    await this.cacheService.set(clientId, JSON.stringify(portal), 300);
+    await this.cacheService.set(
+      `${this.PORTAL_CACHE_PREFIX}${clientId}`,
+      JSON.stringify(portal),
+      this.getPortalDetailCacheTtl(),
+    );
 
     return portal;
+  }
+
+  private getPortalDetailCacheTtl(): number {
+    return this.configService.get<number>('PORTAL_DETAIL_CACHE_TTL_SECONDS');
   }
 }

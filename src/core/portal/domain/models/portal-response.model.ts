@@ -3,6 +3,6 @@ import { Portal } from './portal.model';
 
 @ObjectType()
 export class PortalResponse {
-  @Field(() => Portal)
-  portal: Portal;
+  @Field(() => Portal, { nullable: true })
+  portal?: Portal | null;
 }

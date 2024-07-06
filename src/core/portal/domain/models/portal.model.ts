@@ -138,6 +138,6 @@ export class Portal {
   @Field()
   vendorGroup: string;
 
-  @Field(() => Portfolio)
-  portfolio: Portfolio;
+  @Field(() => Portfolio, { nullable: true })
+  portfolio?: Portfolio | null;
 }

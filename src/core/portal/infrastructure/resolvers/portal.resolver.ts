@@ -1,7 +1,7 @@
+import { Logger } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PortalService } from '../../application/services/portal.service';
 import { PortalResponse } from '../../domain/models/portal-response.model';
-import { Logger } from '@nestjs/common';
 
 @Resolver()
 export class PortalResolver {
@@ -9,7 +9,7 @@ export class PortalResolver {
   constructor(private readonly portalService: PortalService) {}
 
   @Query(() => PortalResponse)
-  async getPortals(
+  async portalDetail(
     @Args('clientId') clientId: string,
   ): Promise<PortalResponse> {
     try {
@@ -18,9 +18,10 @@ export class PortalResolver {
     } catch (error) {
       this.logger.error({
         message: 'Error getting portal',
-        error: error.message,
-        errorStack: error.stack,
+        errorMsg: error.message,
+        error: { ...error },
       });
+      return { portal: null };
     }
   }
 }

@@ -92,13 +92,13 @@ type Portal {
   supplyCenter: String!
   updateDate: String!
   vendorGroup: String!
-  portfolio: Portfolio!
+  portfolio: Portfolio
 }
 
 type PortalResponse {
-  portal: Portal!
+  portal: Portal
 }
 
 type Query {
-  getPortals(clientId: String!): PortalResponse!
+  portalDetail(clientId: String!): PortalResponse!
 }

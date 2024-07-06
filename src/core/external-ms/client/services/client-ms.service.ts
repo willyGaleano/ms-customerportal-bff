@@ -12,9 +12,17 @@ export class ClientMsService {
     private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
 
-  async getById(id: string): Promise<Client> {
-    const clientMsUrl = `${this.getBaseUrl()}/clients/${id}`;
-    return await this.httpClient.get<Client>(clientMsUrl);
+  async getById(id: string): Promise<Client | null> {
+    try {
+      const clientMsUrl = `${this.getBaseUrl()}/clients/${id}`;
+      const clientResponse = await this.httpClient.get<{
+        message: string;
+        data: Client;
+      }>(clientMsUrl);
+      return clientResponse.data;
+    } catch {
+      return null;
+    }
   }
 
   private getBaseUrl(): string {
