@@ -14,9 +14,13 @@ export class ClientPortfolioMsService {
 
   async getById(id: string): Promise<ClientPortfolio | null> {
     try {
-      const clientPortfolioMsUrl = `${this.getBaseUrl()}/client-portfolios/${id}`;
+      const clientPortfolioMsUrl = `${this.getBaseUrl()}/portfolios/${id}`;
 
-      return await this.httpClient.get<ClientPortfolio>(clientPortfolioMsUrl);
+      const portfolioResponse = await this.httpClient.get<{
+        message: string;
+        data: ClientPortfolio;
+      }>(clientPortfolioMsUrl);
+      return portfolioResponse.data;
     } catch {
       return null;
     }

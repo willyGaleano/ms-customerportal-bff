@@ -32,7 +32,18 @@ export class PortalDetailUseCase {
       portfolio: clientPortfolio
         ? {
             ...clientPortfolio,
-            items: clientPortfolio.items ?? [],
+            id: clientPortfolio._id,
+            items: clientPortfolio.items?.map((item) => ({
+              ...item,
+              quantityMaxRedeem: item.quantity_max_redeem,
+              redeemUnit: item.redeem_unit,
+              orderReasonRedeem: item.order_reason_redeem,
+              skuRedeem: item.sku_redeem,
+              price: {
+                ...item.price,
+                fullPrice: item.price.full_price,
+              },
+            })),
           }
         : null,
     };

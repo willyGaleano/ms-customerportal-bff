@@ -11,10 +11,10 @@ export class Item {
   minOrderUnits: string;
   packageDescription: string;
   packageUnitDescription: string;
-  quantityMaxRedeem: number;
-  redeemUnit: string;
-  orderReasonRedeem: string;
-  skuRedeem: boolean;
+  quantity_max_redeem: number;
+  redeem_unit: string;
+  order_reason_redeem: string;
+  sku_redeem: boolean;
   price: Price;
   points: number;
 }

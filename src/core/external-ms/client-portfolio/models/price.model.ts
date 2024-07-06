@@ -1,6 +1,6 @@
 import { Tax } from './tax.model';
 
 export class Price {
-  fullPrice: number;
+  full_price: number;
   taxes: Tax[];
 }

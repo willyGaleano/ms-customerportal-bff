@@ -32,7 +32,6 @@ export class AxiosHttpClientService implements HttpClient {
 
     this.logger.debug({
       msg: 'AxiosHttpClientService GET response',
-      data,
     });
     return data;
   }

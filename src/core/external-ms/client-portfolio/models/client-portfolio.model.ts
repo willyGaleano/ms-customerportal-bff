@@ -1,7 +1,7 @@
 import { Item } from './item.model';
 
 export class ClientPortfolio {
-  id: string;
+  _id: string;
   channel: string;
   country: string;
   createdDate: string;

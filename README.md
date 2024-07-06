@@ -53,6 +53,95 @@
 
 - Portal Detail Query
   ![portal_detail](/etc/docs/images/portal_detail.png)
+
+- Query request
+
+   ```graphql
+    query Query($clientId: String!) {
+    portalDetail(clientId: $clientId) {
+      portal {
+        id
+        address
+        blocked
+        cellPhone
+        channel
+        clientId
+        country
+        customerGroup {
+          group
+          group1
+          group2
+          group3
+          group4
+          group5
+        }
+        customerSchema
+        distrChan
+        division
+        fiscalCode1
+        fiscalCode2
+        frequency
+        frequencyDays
+        idPortfolio
+        immediateDelivery
+        industryCode
+        industryCode1
+        isEnrollment
+        name
+        name2
+        office
+        paymentCondition
+        paymentMethods {
+          clientId
+          typeCredit
+          creditLimit
+          creditUsed
+          amountAvailable
+        }
+        priceGroup
+        priceList
+        routeId
+        salesOrg
+        supplyCenter
+        updateDate
+        vendorGroup
+        portfolio {
+          id
+          channel
+          country
+          createdDate
+          customerCode
+          route
+          items {
+            sku
+            title
+            categoryId
+            category
+            brand
+            classification
+            unitsPerBox
+            minOrderUnits
+            packageDescription
+            packageUnitDescription
+            quantityMaxRedeem
+            redeemUnit
+            orderReasonRedeem
+            skuRedeem
+            price {
+              fullPrice
+              taxes {
+                taxType
+                taxId
+                rate
+              }
+            }
+            points
+          }
+        }
+      }
+    }
+  }
+  ```
   
 - Portal Detail Redis Cache
   ![portal_detail_redis](/etc/docs/images/portal_detail_redis.png)

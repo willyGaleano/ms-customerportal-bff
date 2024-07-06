@@ -2,73 +2,73 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Tax {
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   taxType: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   taxId: string;
 
-  @Field()
+  @Field({ nullable: true })
   rate: number;
 }
 
 @ObjectType()
 export class Price {
-  @Field()
+  @Field({ nullable: true })
   fullPrice: number;
 
-  @Field(() => [Tax])
+  @Field(() => [Tax], { nullable: true })
   taxes: Tax[];
 }
 
 @ObjectType()
 export class Item {
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   sku: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   title: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   categoryId: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   category: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   brand: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   classification: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   unitsPerBox: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   minOrderUnits: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   packageDescription: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   packageUnitDescription: string;
 
-  @Field()
+  @Field({ nullable: true })
   quantityMaxRedeem: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   redeemUnit: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   orderReasonRedeem: string;
 
-  @Field()
+  @Field({ nullable: true })
   skuRedeem: boolean;
 
-  @Field(() => Price)
+  @Field(() => Price, { nullable: true })
   price: Price;
 
-  @Field()
+  @Field({ nullable: true })
   points: number;
 }
 
@@ -92,6 +92,6 @@ export class Portfolio {
   @Field(() => String)
   route: string;
 
-  @Field(() => [Item])
+  @Field(() => [Item], { nullable: true, defaultValue: [] })
   items: Item[];
 }

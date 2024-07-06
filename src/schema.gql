@@ -3,33 +3,33 @@
 # ------------------------------------------------------
 
 type Tax {
-  taxType: String!
-  taxId: String!
-  rate: Float!
+  taxType: String
+  taxId: String
+  rate: Float
 }
 
 type Price {
-  fullPrice: Float!
-  taxes: [Tax!]!
+  fullPrice: Float
+  taxes: [Tax!]
 }
 
 type Item {
-  sku: String!
-  title: String!
-  categoryId: String!
-  category: String!
-  brand: String!
-  classification: String!
-  unitsPerBox: String!
-  minOrderUnits: String!
-  packageDescription: String!
-  packageUnitDescription: String!
-  quantityMaxRedeem: Float!
-  redeemUnit: String!
-  orderReasonRedeem: String!
-  skuRedeem: Boolean!
-  price: Price!
-  points: Float!
+  sku: String
+  title: String
+  categoryId: String
+  category: String
+  brand: String
+  classification: String
+  unitsPerBox: String
+  minOrderUnits: String
+  packageDescription: String
+  packageUnitDescription: String
+  quantityMaxRedeem: Float
+  redeemUnit: String
+  orderReasonRedeem: String
+  skuRedeem: Boolean
+  price: Price
+  points: Float
 }
 
 type Portfolio {
@@ -39,7 +39,7 @@ type Portfolio {
   createdDate: String!
   customerCode: String!
   route: String!
-  items: [Item!]!
+  items: [Item!]
 }
 
 type CustomerGroup {
